@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - Tienda de Sonido</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="cart-page">
+
+        <h1>Mi Carrito</h1>
+
+        <a href="index.html#catalogo" class="catalog-button">
+            ← Volver al catálogo
+        </a>
+
+        <!-- Aquí JS va a insertar los productos guardados en localStorage -->
+        <div id="cart-items"></div>
+
+        <div class="cart-total">
+            Total: <span id="cart-total">$0 CLP</span>
+        </div>
+
+        <button id="clear-cart-btn" class="add-to-cart-btn">
+            Vaciar carrito
+        </button>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- productos.js primero: aquí están obtenerCarrito(), guardarCarrito(), etc. -->
+    <script src="productos.js"></script>
+    <script src="carrito.js"></script>
+
+</body>
+
+</html>
