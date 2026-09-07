@@ -171,7 +171,7 @@ body {
 
 /* Ocultar elementos */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /* Footer */
@@ -272,6 +272,277 @@ footer {
     color: #555;
     margin: 8px 0;
 }
+
+.pagina-login {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.tarjeta-login {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.tarjeta-login h1 {
+    margin-bottom: 20px;
+}
+
+.tarjeta-login label {
+    display: block;
+    text-align: left;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.tarjeta-login input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.tarjeta-login input:focus {
+    border-color: #222;
+    outline: none;
+}
+
+.boton-login {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.boton-login:hover {
+    background-color: #444;
+}
+
+.boton-registro {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #f5f5f5;
+    color: #222;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.boton-registro:hover {
+    background-color: #eee;
+}
+
+.boton-principal {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.boton-principal:hover {
+    background-color: #444;
+}
+
+.boton-secundario {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #f5f5f5;
+    color: #222;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.boton-secundario:hover {
+    background-color: #eee;
+}
+
+.boton-salir {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.boton-salir:hover {
+    background-color: #c62828;
+}
+
+.pagina-panel {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cabecera-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cabecera-panel h1 {
+    margin: 0;
+}
+
+.tarjeta-panel {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-panel h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.tarjeta-panel label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.tarjeta-panel input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.tarjeta-panel input:focus {
+    border-color: #222;
+    outline: none;
+}
+
+.tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.tabla th {
+    background-color: #f5f5f5;
+    font-size: 14px;
+}
+
+.boton-editar {
+    padding: 5px 12px;
+    background-color: #222;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.boton-editar:hover {
+    background-color: #444;
+}
+
+.item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+
+.ventana {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ventana-contenido {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.ventana-contenido h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.ventana-contenido label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+.ventana-contenido input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.ventana-contenido input:focus {
+    border-color: #222;
+    outline: none;
+}
+
+
 @media (max-width: 900px) {
     .product-box {
         width: calc(50% - 10px);

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Tienda de Sonido</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="pagina-login">
+
+        <a href="index.html#catalogo" class="catalog-button">← Volver al catálogo</a>
+
+        <div class="tarjeta-login" id="login-card">
+            <h1>Iniciar Sesión</h1>
+
+            <label>Usuario:</label>
+            <input type="text" id="usuario" placeholder="Tu usuario">
+
+            <label>Clave:</label>
+            <input type="password" id="clave" placeholder="Tu clave">
+
+            <button class="boton-login" onclick="login()">Ingresar</button>
+            <button class="boton-registro" onclick="mostrarRegistro()">Crear una cuenta</button>
+        </div>
+
+        <div class="tarjeta-login hidden" id="registro-card">
+            <h1>Crear Cuenta</h1>
+
+            <label>Nombre:</label>
+            <input type="text" id="registro-nombre" placeholder="Tu nombre">
+
+            <label>Correo:</label>
+            <input type="email" id="registro-correo" placeholder="Tu correo">
+
+            <label>Clave:</label>
+            <input type="password" id="registro-clave" placeholder="Tu clave">
+
+            <button class="boton-registro" onclick="registro()">Registrarme</button>
+            <button class="boton-login" onclick="mostrarLogin()">Ya tengo cuenta</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="cuenta.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Tienda de Sonido</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="pagina-panel">
+
+        <div class="cabecera-panel">
+            <h1>Panel Administrador</h1>
+            <a href="cuenta.html" class="boton-salir">Cerrar Sesión</a>
+        </div>
+
+        <div class="tarjeta-panel">
+            <h2>Productos de la tienda</h2>
+            <p>Total: <strong id="total-productos">0</strong> productos</p>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-productos"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div class="ventana hidden" id="ventana-editar">
+        <div class="ventana-contenido">
+            <h2>Editar Producto</h2>
+
+            <label>Nombre:</label>
+            <input type="text" id="edit-nombre">
+
+            <label>Precio:</label>
+            <input type="number" id="edit-precio">
+
+            <label>Stock:</label>
+            <input type="number" id="edit-stock">
+
+            <button class="boton-principal" onclick="guardarEdicion()">Guardar</button>
+            <button class="boton-secundario" onclick="cerrarVentana()">Cancelar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="productos.js"></script>
+    <script src="admin.js"></script>
+
+</body>
+
+</html>
