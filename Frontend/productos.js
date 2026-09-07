@@ -577,7 +577,7 @@ function formatearPrecio(numero) {
 
 function renderProductos(lista) {
     const contenedor = document.getElementById("products-container");
-    if (!contenedor) return; // si esta página no tiene el contenedor, no hace nada
+    if (!contenedor) return;
 
     const productosAMostrar = lista || productos;
 
@@ -586,18 +586,13 @@ function renderProductos(lista) {
         return;
     }
 
-    // .map() recorre el arreglo y devuelve un pedazo de HTML por cada producto.
-    // .join("") junta todos los pedazos en un solo string.
     contenedor.innerHTML = productosAMostrar.map(function (producto) {
         return `
-            <div class="col-md-4 col-sm-6 product-box">
-                <a href="#">
-                    <img alt="${producto.nombre}" src="${producto.imagen}" width="100%">
-                    <span class="category-tag">${producto.categoria}</span>
-                    <h3>${producto.marca} ${producto.nombre}</h3>
-                    <p class="short-desc">${producto.descripcion}</p>
-                    <strong class="price">${formatearPrecio(producto.precio)}</strong>
-                </a>
+            <div class="col-md-4 col-sm-6 product-box" data-codigo="${producto.codigo}">
+                <img alt="${producto.nombre}" src="${producto.imagen}" width="100%">
+                <span class="category-tag">${producto.categoria}</span>
+                <h3>${producto.marca} ${producto.nombre}</h3>
+                <strong class="price">${formatearPrecio(producto.precio)}</strong>
                 <button class="add-to-cart-btn" data-codigo="${producto.codigo}">
                     Agregar al carrito
                 </button>
@@ -605,13 +600,28 @@ function renderProductos(lista) {
         `;
     }).join("");
 
-    // Una vez creados los botones, les enchufamos el evento de clic.
     document.querySelectorAll(".add-to-cart-btn").forEach(function (boton) {
         boton.addEventListener("click", function () {
             const codigoProducto = boton.dataset.codigo;
             agregarAlCarrito(codigoProducto);
         });
     });
+
+    document.querySelectorAll(".product-box").forEach(function (caja) {
+        caja.addEventListener("click", function (evento) {
+            if (evento.target.classList.contains("add-to-cart-btn")) return;
+            verDetalle(caja.dataset.codigo);
+        });
+    });
+}       
+
+/* Guarda el producto elegido en localStorage y cambia a la página de detalle. */
+function verDetalle(codigoProducto) {
+    const producto = productos.find(function (p) { return p.codigo === codigoProducto; });
+    if (!producto) return;
+
+    localStorage.setItem("productoSeleccionado", JSON.stringify(producto));
+    window.location.href = "detalle.html";
 }
 
 /* BUSCAR + ORDENAR

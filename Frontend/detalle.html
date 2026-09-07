@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del producto - Tienda de Sonido</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="detail-page">
+
+        <a href="index.html#catalogo" class="catalog-button">
+            ← Volver al catálogo
+        </a>
+
+        <div class="detail-card">
+
+            <img id="detalle-imagen" alt="">
+
+            <div class="detail-info">
+                <span id="detalle-categoria" class="category-tag"></span>
+                <h1 id="detalle-nombre"></h1>
+                <p id="detalle-marca-modelo"></p>
+                <p id="detalle-descripcion"></p>
+                <p id="detalle-stock"></p>
+                <strong id="detalle-precio" class="price"></strong>
+
+                <button id="detalle-add-cart-btn" class="add-to-cart-btn">
+                    Agregar al carrito
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2024 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- productos.js primero: aquí están los productos y agregarAlCarrito() -->
+    <script src="productos.js"></script>
+    <script src="detalle.js"></script>
+
+</body>
+
+</html>
