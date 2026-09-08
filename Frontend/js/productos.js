@@ -583,10 +583,17 @@ const destacadosCodigos = ["GA002", "GE002", "BT002"];
    bloque de HTML dos veces. */
 function crearTarjetaProducto(producto, esDestacado) {
     const badge = esDestacado ? '<span class="featured-badge">⭐ Destacado</span>' : "";
+    
+    // Arreglar ruta de imagen si estamos en la carpeta html/
+    let rutaImagen = producto.imagen;
+    if (window.location.pathname.includes('/html/')) {
+        rutaImagen = "../" + producto.imagen;
+    }
+
     return `
         <div class="col-md-4 col-sm-6 product-box" data-codigo="${producto.codigo}">
             ${badge}
-            <img alt="${producto.nombre}" src="${producto.imagen}" width="100%">
+            <img alt="${producto.nombre}" src="${rutaImagen}" width="100%">
             <span class="category-tag">${producto.categoria}</span>
             <h3>${producto.marca} ${producto.nombre}</h3>
             <strong class="price">${formatearPrecio(producto.precio)}</strong>
@@ -685,7 +692,11 @@ function verDetalle(codigoProducto) {
     if (!producto) return;
 
     localStorage.setItem("productoSeleccionado", JSON.stringify(producto));
-    window.location.href = "detalle.html";
+    if (window.location.pathname.includes('/html/')) {
+        window.location.href = "detalle.html";
+    } else {
+        window.location.href = "html/detalle.html";
+    }
 }
 
 /* BUSCAR + ORDENAR + FILTRO DE CATEGORÍA

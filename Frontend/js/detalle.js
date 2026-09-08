@@ -10,11 +10,11 @@ function renderDetalle() {
     // no hay ningún producto guardado todavía.
     if (!producto) {
         document.querySelector(".detail-page").innerHTML =
-            "<p>No se encontró ningún producto. <a href='index.html#catalogo'>Volver al catálogo</a></p>";
+            "<p>No se encontró ningún producto. <a href='../index.html#catalogo'>Volver al catálogo</a></p>";
         return;
     }
 
-    document.getElementById("detalle-imagen").src = producto.imagen;
+    document.getElementById("detalle-imagen").src = "../" + producto.imagen;
     document.getElementById("detalle-imagen").alt = producto.nombre;
     document.getElementById("detalle-categoria").textContent = producto.categoria;
     document.getElementById("detalle-nombre").textContent = producto.marca + " " + producto.nombre;

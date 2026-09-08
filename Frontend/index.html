@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda de Sonido</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -17,6 +17,29 @@
 
     <div id="catalogo">
         <h1 class="title-products">Tu sonido, nuestra pasión.</h1>
+
+         <div class="header-icons">
+                <a href="html/nosotros.html" class="cart-link">
+                    ℹ️ Nosotros
+                </a>
+
+                <a href="html/contacto.html" class="cart-link">
+                    📞 Contacto
+                </a>
+
+                <a href="html/cuenta.html" class="cart-link">
+                    👤 Cuenta
+                </a>
+ 
+                <a href="html/carrito.html" class="cart-link">
+                    🛒 Carrito (<span id="cart-count">0</span>)
+                </a>
+            </div>
+
+        <h2 class="title-destacados">Destacados</h2>
+        <div class="row" id="destacados-container"></div>
+
+        <div class="category-filter-bar" id="category-filter-bar"></div>
 
         <div class="row filters-row">
             <div>
@@ -36,30 +59,7 @@
                     <option value="desc">Precio más alto</option>
                 </select>
             </div>
-
-             <div class="header-icons">
-                <a href="nosotros.html" class="cart-link">
-                    ℹ️ Nosotros
-                </a>
-
-                <a href="contacto.html" class="cart-link">
-                    📞 Contacto
-                </a>
-
-                <a href="cuenta.html" class="cart-link">
-                    👤 Cuenta
-                </a>
- 
-                <a href="carrito.html" class="cart-link">
-                    🛒 Carrito (<span id="cart-count">0</span>)
-                </a>
-            </div>
         </div>
-
-        <h2 class="title-destacados">Destacados</h2>
-        <div class="row" id="destacados-container"></div>
-
-        <div class="category-filter-bar" id="category-filter-bar"></div>
 
         <div class="row" id="products-container"></div>
 
@@ -70,7 +70,7 @@
     </footer>
 
     <!-- Conectamos el JS que dibuja los productos y maneja el carrito -->
-    <script src="productos.js"></script>
+    <script src="js/productos.js"></script>
 
 </body>
 
