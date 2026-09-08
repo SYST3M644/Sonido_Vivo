@@ -1,8 +1,8 @@
 function mostrarCompras() {
     let compras = [
-        { nombre: "Guitarra Acústica Folk", precio: 129990, fecha: "15/08/2024" },
-        { nombre: "Cable Instrumento 3m", precio: 9990, fecha: "20/08/2024" },
-        { nombre: "Afinador Cromático Clip", precio: 12990, fecha: "02/09/2024" }
+        { nombre: "Guitarra Acústica Folk", precio: 129990, fecha: "15/08/2026" },
+        { nombre: "Cable Instrumento 3m", precio: 9990, fecha: "20/08/2026" },
+        { nombre: "Afinador Cromático Clip", precio: 12990, fecha: "02/09/2026" }
     ];
 
     let contenedor = document.getElementById("lista-compras");
@@ -11,10 +11,7 @@ function mostrarCompras() {
     for (let i = 0; i < compras.length; i++) {
         let div = document.createElement("div");
         div.className = "item";
-        div.innerHTML =
-            "<strong>" + compras[i].nombre + "</strong> - $" +
-            compras[i].precio.toLocaleString() +
-            " <span style='color:#888; font-size:13px;'>(" + compras[i].fecha + ")</span>";
+        div.innerHTML = "<strong>" + compras[i].nombre + "</strong> - $" + compras[i].precio + " (" + compras[i].fecha + ")";
         contenedor.appendChild(div);
     }
 }
@@ -32,9 +29,7 @@ function mostrarFavoritos() {
     for (let i = 0; i < favoritos.length; i++) {
         let div = document.createElement("div");
         div.className = "item";
-        div.innerHTML =
-            "<strong>" + favoritos[i].nombre + "</strong> - $" +
-            favoritos[i].precio.toLocaleString();
+        div.innerHTML = "<strong>" + favoritos[i].nombre + "</strong> - $" + favoritos[i].precio;
         contenedor.appendChild(div);
     }
 }

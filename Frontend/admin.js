@@ -11,7 +11,7 @@ function mostrarProductos() {
         fila.innerHTML =
             "<td>" + productos[i].codigo + "</td>" +
             "<td>" + productos[i].nombre + "</td>" +
-            "<td>$" + productos[i].precio.toLocaleString() + "</td>" +
+            "<td>$" + productos[i].precio + "</td>" +
             "<td>" + productos[i].stock + "</td>" +
             '<td><button class="boton-editar" onclick="abrirEditar(' + i + ')">Editar</button></td>';
         tabla.appendChild(fila);
@@ -34,11 +34,11 @@ function cerrarVentana() {
 function guardarEdicion() {
     if (productoEditando === null) return;
 
-    let nombre = document.getElementById("edit-nombre").value.trim();
-    let precio = parseInt(document.getElementById("edit-precio").value);
-    let stock = parseInt(document.getElementById("edit-stock").value);
+    let nombre = document.getElementById("edit-nombre").value;
+    let precio = Number(document.getElementById("edit-precio").value);
+    let stock = Number(document.getElementById("edit-stock").value);
 
-    if (nombre === "" || isNaN(precio) || isNaN(stock)) {
+    if (nombre === "" || precio === 0 || stock === 0) {
         alert("Completá todos los campos");
         return;
     }

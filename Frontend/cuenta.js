@@ -21,17 +21,27 @@ function login() {
     let clave = document.getElementById("clave").value;
 
     if (usuario === "" || clave === "") {
-        alert("Ingresá usuario y clave");
+        alert("Ingresá correo y clave");
         return;
     }
 
-    if (usuario === "admin" && clave === "1234") {
+    if (usuario.includes("@sonidovivo.cl") === false) {
+        alert("Correo inválido, debe contener @sonidovivo.cl");
+        return;
+    }
+
+    if (clave.length < 4) {
+        alert("La clave debe tener al menos 4 caracteres");
+        return;
+    }
+
+    if (usuario === "admin@sonidovivo.cl" && clave === "1234") {
         alert("Bienvenido Administrador");
         window.location.href = "admin.html";
         return;
     }
 
-    if (usuario === "user" && clave === "1234") {
+    if (usuario === "user@sonidovivo.cl" && clave === "1234") {
         alert("Bienvenido Cliente");
         window.location.href = "usuario.html";
         return;
@@ -40,7 +50,7 @@ function login() {
     let usuarios = obtenerUsuarios();
 
     for (let i = 0; i < usuarios.length; i++) {
-        if (usuarios[i].nombre === usuario && usuarios[i].clave === clave) {
+        if (usuarios[i].correo === usuario && usuarios[i].clave === clave) {
             alert("Bienvenido " + usuarios[i].nombre);
             window.location.href = "usuario.html";
             return;
@@ -61,6 +71,16 @@ function registro() {
         return;
     }
 
+    if (nombre.length < 4) {
+        alert("El nombre debe tener al menos 4 caracteres");
+        return;
+    }
+
+    if (correo.includes("@sonidovivo.cl") === false) {
+        alert("Correo inválido, debe contener @sonidovivo.cl");
+        return;
+    }
+
     if (clave.length < 4) {
         alert("La clave debe tener al menos 4 caracteres");
         return;
@@ -71,6 +91,13 @@ function registro() {
     for (let i = 0; i < usuarios.length; i++) {
         if (usuarios[i].nombre === nombre) {
             alert("Ese nombre de usuario ya existe");
+            return;
+        }
+    }
+
+    for (let i = 0; i < usuarios.length; i++) {
+        if (usuarios[i].correo === correo) {
+            alert("Ese correo ya está registrado");
             return;
         }
     }

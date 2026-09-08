@@ -36,6 +36,11 @@ body {
     border-radius: 6px;
 }
 
+#catalogo {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* Título */
 .title-products {
     text-align: center;
