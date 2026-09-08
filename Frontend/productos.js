@@ -570,6 +570,92 @@ function formatearPrecio(numero) {
     return "$" + numero.toLocaleString("es-CL") + " CLP";
 }
 
+/* Guarda qué categoría está activa. "todos" = sin filtro de categoría. */
+let categoriaActual = "todos";
+
+/* CÓDIGOS DE PRODUCTOS DESTACADOS
+   Cambia estos 3 códigos cuando quieras destacar otros productos;
+   no hace falta tocar nada más del código. */
+const destacadosCodigos = ["GA002", "GE002", "BT002"];
+
+/* Genera la tarjeta HTML de un producto. La reutilizan tanto
+   renderProductos() como renderDestacados() para no repetir el mismo
+   bloque de HTML dos veces. */
+function crearTarjetaProducto(producto, esDestacado) {
+    const badge = esDestacado ? '<span class="featured-badge">⭐ Destacado</span>' : "";
+    return `
+        <div class="col-md-4 col-sm-6 product-box" data-codigo="${producto.codigo}">
+            ${badge}
+            <img alt="${producto.nombre}" src="${producto.imagen}" width="100%">
+            <span class="category-tag">${producto.categoria}</span>
+            <h3>${producto.marca} ${producto.nombre}</h3>
+            <strong class="price">${formatearPrecio(producto.precio)}</strong>
+            <button class="add-to-cart-btn" data-codigo="${producto.codigo}">
+                Agregar al carrito
+            </button>
+        </div>
+    `;
+}
+
+/* Conecta los clics de "Agregar al carrito" y de la tarjeta (para ver detalle),
+   pero SOLO dentro del contenedor que le pasamos. Antes se buscaba en todo el
+   documento, y eso duplicaba los eventos cuando había más de un contenedor
+   de productos en la misma página (destacados + catálogo). */
+function activarEventosDeTarjetas(contenedor) {
+    contenedor.querySelectorAll(".add-to-cart-btn").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            agregarAlCarrito(boton.dataset.codigo);
+        });
+    });
+
+    contenedor.querySelectorAll(".product-box").forEach(function (caja) {
+        caja.addEventListener("click", function (evento) {
+            if (evento.target.classList.contains("add-to-cart-btn")) return;
+            verDetalle(caja.dataset.codigo);
+        });
+    });
+}
+
+/* Dibuja los 3 productos destacados. Se llama UNA sola vez al cargar la
+   página (no cambia con el buscador ni con el filtro de categoría). */
+function renderDestacados() {
+    const contenedor = document.getElementById("destacados-container");
+    if (!contenedor) return;
+
+    const destacados = destacadosCodigos
+        .map(function (codigo) { return productos.find(function (p) { return p.codigo === codigo; }); })
+        .filter(Boolean); // por si algún código no existiera en el arreglo
+
+    contenedor.innerHTML = destacados.map(function (producto) {
+        return crearTarjetaProducto(producto, true);
+    }).join("");
+
+    activarEventosDeTarjetas(contenedor);
+}
+
+/* Arma la barra de categorías a partir del arreglo "productos". */
+function renderFiltroCategorias() {
+    const contenedor = document.getElementById("category-filter-bar");
+    if (!contenedor) return;
+
+    const categoriasUnicas = [...new Set(productos.map(function (p) { return p.categoria; }))];
+    const categorias = ["Todos"].concat(categoriasUnicas);
+
+    contenedor.innerHTML = categorias.map(function (categoria) {
+        const valor = categoria === "Todos" ? "todos" : categoria;
+        const claseActiva = (valor === categoriaActual) ? "categoria-btn activa" : "categoria-btn";
+        return `<button class="${claseActiva}" data-categoria="${valor}">${categoria}</button>`;
+    }).join("");
+
+    document.querySelectorAll(".categoria-btn").forEach(function (boton) {
+        boton.addEventListener("click", function () {
+            categoriaActual = boton.dataset.categoria;
+            renderFiltroCategorias();
+            filtrarYOrdenarProductos();
+        });
+    });
+}
+
 /* Renderizado de productos
    Recibe un arreglo de productos y los dibuja en el contenedor de la pagina.
    Recibe "lista" para poder mostrar una versión filtrada/ordenada;
@@ -587,33 +673,11 @@ function renderProductos(lista) {
     }
 
     contenedor.innerHTML = productosAMostrar.map(function (producto) {
-        return `
-            <div class="col-md-4 col-sm-6 product-box" data-codigo="${producto.codigo}">
-                <img alt="${producto.nombre}" src="${producto.imagen}" width="100%">
-                <span class="category-tag">${producto.categoria}</span>
-                <h3>${producto.marca} ${producto.nombre}</h3>
-                <strong class="price">${formatearPrecio(producto.precio)}</strong>
-                <button class="add-to-cart-btn" data-codigo="${producto.codigo}">
-                    Agregar al carrito
-                </button>
-            </div>
-        `;
+        return crearTarjetaProducto(producto, false);
     }).join("");
 
-    document.querySelectorAll(".add-to-cart-btn").forEach(function (boton) {
-        boton.addEventListener("click", function () {
-            const codigoProducto = boton.dataset.codigo;
-            agregarAlCarrito(codigoProducto);
-        });
-    });
-
-    document.querySelectorAll(".product-box").forEach(function (caja) {
-        caja.addEventListener("click", function (evento) {
-            if (evento.target.classList.contains("add-to-cart-btn")) return;
-            verDetalle(caja.dataset.codigo);
-        });
-    });
-}       
+    activarEventosDeTarjetas(contenedor);
+}
 
 /* Guarda el producto elegido en localStorage y cambia a la página de detalle. */
 function verDetalle(codigoProducto) {
@@ -624,9 +688,9 @@ function verDetalle(codigoProducto) {
     window.location.href = "detalle.html";
 }
 
-/* BUSCAR + ORDENAR
-   Se ejecuta cada vez que el usuario escribe en el buscador
-   o cambia el select de orden.*/
+/* BUSCAR + ORDENAR + FILTRO DE CATEGORÍA
+   Se ejecuta cada vez que el usuario escribe en el buscador,
+   cambia el select de orden, o hace clic en una categoría.*/
 function filtrarYOrdenarProductos() {
     const inputBusqueda = document.getElementById("search-input");
     const selectOrden = document.getElementById("select-order");
@@ -634,13 +698,17 @@ function filtrarYOrdenarProductos() {
     const texto = inputBusqueda ? inputBusqueda.value.toLowerCase().trim() : "";
     const orden = selectOrden ? selectOrden.value : "default";
 
-    // .filter() deja solo los productos cuyo nombre incluye el texto buscado.
-    // .toLowerCase() en ambos lados para que no importen las mayúsculas.
+    // 1) Filtro por categoría.
     let resultado = productos.filter(function (producto) {
+        return categoriaActual === "todos" || producto.categoria === categoriaActual;
+    });
+
+    // 2) Filtro por texto de búsqueda, sobre lo que ya quedó filtrado por categoría.
+    resultado = resultado.filter(function (producto) {
         return producto.nombre.toLowerCase().includes(texto);
     });
 
-    // .sort() reordena el arreglo resultante. La función de comparación
+    // 3) .sort() reordena el arreglo resultante. La función de comparación
     // devuelve un número negativo si "a" debe ir antes que "b".
     if (orden === "asc") {
         resultado.sort(function (a, b) { return a.precio - b.precio; });
@@ -700,11 +768,13 @@ function actualizarContadorCarrito() {
 }
 
 /* CARGAR LA PAGINA
-   aca hace que el buscador y el select de orden funcionen, y que se dibujen los productos
-   y el contador del carrito. */
+   aca hace que el buscador y el select de orden funcionen, y que se dibujen
+   los destacados, el catálogo, la barra de categorías y el contador del carrito. */
 
 document.addEventListener("DOMContentLoaded", function () {
+    renderDestacados();
     renderProductos();
+    renderFiltroCategorias();
     actualizarContadorCarrito();
 
     const inputBusqueda = document.getElementById("search-input");

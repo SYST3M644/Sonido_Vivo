@@ -13,13 +13,17 @@
     <div class="welcome">
         <img src="imagenes/banner_principal.jpg" alt="Bienvenido a la Tienda de Sonido" class="welcome-banner">
         <h1>Bienvenido a la Tienda de Sonido</h1>
-        <a href="#catalogo" class="catalog-button">
-            Ver catálogo
-        </a>
     </div>
 
     <div id="catalogo">
-        <h1 class="title-products">Catalogo de Tienda de Sonido</h1>
+        <h1 class="title-products">Tu sonido, nuestra pasión.</h1>
+
+        <!-- Productos destacados: JS los llena automáticamente -->
+        <h2 class="title-destacados">Destacados</h2>
+        <div class="row" id="destacados-container"></div>
+
+        <!-- Barra grande de categorías: JS la llena automáticamente -->
+        <div class="category-filter-bar" id="category-filter-bar"></div>
 
         <div class="row filters-row">
             <div>
@@ -41,6 +45,14 @@
             </div>
 
              <div class="header-icons">
+                <a href="nosotros.html" class="cart-link">
+                    ℹ️ Nosotros
+                </a>
+
+                <a href="contacto.html" class="cart-link">
+                    📞 Contacto
+                </a>
+
                 <a href="cuenta.html" class="cart-link">
                     👤 Cuenta
                 </a>
