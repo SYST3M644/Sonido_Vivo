@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador - Usuarios - Sonido Vivo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+
+<body>
+
+    <div class="pagina-ancha">
+
+        <header class="cabecera-panel">
+            <h1>Mantenedor de usuarios</h1>
+            <a href="cuenta.html" class="boton-salir">Cerrar sesión</a>
+        </header>
+
+        <nav class="nav-principal">
+            <a href="admin.html">📋 Panel</a>
+            <a href="admin-productos.html">🎸 Productos</a>
+            <a href="admin-usuarios.html" class="activo">👤 Usuarios</a>
+            <a href="../index.html">🏠 Ver tienda</a>
+        </nav>
+
+        <main>
+
+            <!-- FORMULARIO: sirve para crear y para editar -->
+            <section class="tarjeta-panel">
+                <h2 id="titulo-formulario">Nuevo usuario</h2>
+
+                <form id="form-usuario" novalidate>
+
+                    <label for="u-run">RUN *</label>
+                    <input type="text" id="u-run" maxlength="9" placeholder="Ej: 190110222">
+                    <span class="mensaje-ayuda">Sin puntos ni guion, entre 7 y 9 caracteres.</span>
+                    <span class="mensaje-error" id="error-u-run"></span>
+
+                    <label for="u-nombre">
+                        Nombre *
+                        <span class="contador" id="contador-u-nombre">0 / 50</span>
+                    </label>
+                    <input type="text" id="u-nombre" maxlength="50" autocomplete="given-name" placeholder="Ej: Nicolás">
+                    <span class="mensaje-error" id="error-u-nombre"></span>
+
+                    <label for="u-apellidos">
+                        Apellidos *
+                        <span class="contador" id="contador-u-apellidos">0 / 100</span>
+                    </label>
+                    <input type="text" id="u-apellidos" maxlength="100" autocomplete="family-name"
+                        placeholder="Ej: Rojas Soto">
+                    <span class="mensaje-error" id="error-u-apellidos"></span>
+
+                    <label for="u-correo">
+                        Correo *
+                        <span class="contador" id="contador-u-correo">0 / 100</span>
+                    </label>
+                    <input type="email" id="u-correo" maxlength="100" autocomplete="email" list="dominios-correo"
+                        placeholder="nombre@duoc.cl">
+                    <datalist id="dominios-correo">
+                        <option value="@duoc.cl"></option>
+                        <option value="@profesor.duoc.cl"></option>
+                        <option value="@gmail.com"></option>
+                    </datalist>
+                    <span class="mensaje-ayuda">Solo @duoc.cl, @profesor.duoc.cl y @gmail.com</span>
+                    <span class="mensaje-error" id="error-u-correo"></span>
+
+                    <label for="u-nacimiento">Fecha de nacimiento</label>
+                    <input type="date" id="u-nacimiento">
+                    <span class="mensaje-ayuda">Opcional.</span>
+                    <span class="mensaje-error" id="error-u-nacimiento"></span>
+
+                    <label for="u-tipo">Tipo de usuario *</label>
+                    <select id="u-tipo">
+                        <option value="">-- Selecciona un perfil --</option>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Cliente">Cliente</option>
+                        <option value="Vendedor">Vendedor</option>
+                    </select>
+                    <span class="mensaje-error" id="error-u-tipo"></span>
+
+                    <label for="u-region">Región *</label>
+                    <select id="u-region">
+                        <option value="">-- Selecciona la región --</option>
+                    </select>
+                    <span class="mensaje-error" id="error-u-region"></span>
+
+                    <label for="u-comuna">Comuna *</label>
+                    <select id="u-comuna">
+                        <option value="">-- Primero elige una región --</option>
+                    </select>
+                    <span class="mensaje-error" id="error-u-comuna"></span>
+
+                    <label for="u-direccion">
+                        Dirección *
+                        <span class="contador" id="contador-u-direccion">0 / 300</span>
+                    </label>
+                    <textarea id="u-direccion" maxlength="300" autocomplete="street-address"
+                        placeholder="Calle, número, depto."></textarea>
+                    <span class="mensaje-error" id="error-u-direccion"></span>
+
+                    <div class="fila-botones">
+                        <button type="submit" class="boton-principal" id="btn-guardar">Guardar usuario</button>
+                        <button type="button" class="boton-secundario" id="btn-cancelar">Cancelar</button>
+                    </div>
+
+                </form>
+
+                <div id="aviso-usuario"></div>
+            </section>
+
+            <!-- LISTADO -->
+            <section class="tarjeta-panel">
+                <h2>Usuarios registrados</h2>
+
+                <div class="barra-panel">
+                    <input type="search" id="buscar-usuario" placeholder="Buscar por RUN, nombre, correo o perfil">
+                </div>
+
+                <p>Total: <strong id="total-usuarios">0</strong> usuarios</p>
+
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>RUN</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Perfil</th>
+                            <th>Comuna</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-usuarios"></tbody>
+                </table>
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- regiones.js primero: desde ahí sale el arreglo de regiones y comunas -->
+    <script src="../js/regiones.js"></script>
+    <script src="../js/admin-usuarios.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador - Productos - Sonido Vivo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+
+<body>
+
+    <div class="pagina-ancha">
+
+        <header class="cabecera-panel">
+            <h1>Mantenedor de productos</h1>
+            <a href="cuenta.html" class="boton-salir">Cerrar sesión</a>
+        </header>
+
+        <nav class="nav-principal">
+            <a href="admin.html">📋 Panel</a>
+            <a href="admin-productos.html" class="activo">🎸 Productos</a>
+            <a href="admin-usuarios.html">👤 Usuarios</a>
+            <a href="../index.html">🏠 Ver tienda</a>
+        </nav>
+
+        <main>
+
+            <!-- FORMULARIO: sirve para crear y para editar -->
+            <section class="tarjeta-panel">
+                <h2 id="titulo-formulario">Nuevo producto</h2>
+
+                <form id="form-producto" novalidate>
+
+                    <label for="p-codigo">Código *</label>
+                    <input type="text" id="p-codigo" maxlength="20" placeholder="Ej: GA006">
+                    <span class="mensaje-ayuda">Texto, mínimo 3 caracteres. No se puede repetir.</span>
+                    <span class="mensaje-error" id="error-p-codigo"></span>
+
+                    <label for="p-nombre">
+                        Nombre *
+                        <span class="contador" id="contador-p-nombre">0 / 100</span>
+                    </label>
+                    <input type="text" id="p-nombre" maxlength="100" placeholder="Ej: Guitarra Acústica Folk">
+                    <span class="mensaje-error" id="error-p-nombre"></span>
+
+                    <label for="p-categoria">Categoría *</label>
+                    <select id="p-categoria">
+                        <option value="">-- Selecciona una categoría --</option>
+                    </select>
+                    <span class="mensaje-error" id="error-p-categoria"></span>
+
+                    <label for="p-marca">Marca</label>
+                    <input type="text" id="p-marca" maxlength="50" list="lista-marcas" placeholder="Ej: Yamaha">
+                    <datalist id="lista-marcas"></datalist>
+                    <span class="mensaje-error" id="error-p-marca"></span>
+
+                    <label for="p-modelo">Modelo</label>
+                    <input type="text" id="p-modelo" maxlength="50" placeholder="Ej: F310">
+                    <span class="mensaje-error" id="error-p-modelo"></span>
+
+                    <label for="p-descripcion">
+                        Descripción
+                        <span class="contador" id="contador-p-descripcion">0 / 500</span>
+                    </label>
+                    <textarea id="p-descripcion" maxlength="500" placeholder="Opcional"></textarea>
+                    <span class="mensaje-error" id="error-p-descripcion"></span>
+
+                    <label for="p-precio">Precio *</label>
+                    <input type="number" id="p-precio" step="0.01" min="0" placeholder="0">
+                    <span class="mensaje-ayuda">Mínimo 0. Si el precio es 0 el producto queda como FREE.</span>
+                    <span class="mensaje-error" id="error-p-precio"></span>
+
+                    <label for="p-stock">Stock *</label>
+                    <input type="number" id="p-stock" step="1" min="0" placeholder="0">
+                    <span class="mensaje-ayuda">Solo números enteros, mínimo 0.</span>
+                    <span class="mensaje-error" id="error-p-stock"></span>
+
+                    <label for="p-critico">Stock crítico</label>
+                    <input type="number" id="p-critico" step="1" min="0" placeholder="Opcional">
+                    <span class="mensaje-ayuda">Cuando el stock sea igual o menor a este número, avisamos en la
+                        tabla.</span>
+                    <span class="mensaje-error" id="error-p-critico"></span>
+
+                    <label for="p-imagen">Imagen</label>
+                    <input type="text" id="p-imagen" placeholder="imagenes/GA006.jpg">
+                    <span class="mensaje-ayuda">Opcional. Ruta de la imagen dentro del proyecto.</span>
+                    <span class="mensaje-error" id="error-p-imagen"></span>
+
+                    <div class="fila-botones">
+                        <button type="submit" class="boton-principal" id="btn-guardar">Guardar producto</button>
+                        <button type="button" class="boton-secundario" id="btn-cancelar">Cancelar</button>
+                    </div>
+
+                </form>
+
+                <div id="aviso-producto"></div>
+            </section>
+
+            <!-- LISTADO -->
+            <section class="tarjeta-panel">
+                <h2>Productos en la tienda</h2>
+
+                <div class="barra-panel">
+                    <input type="search" id="buscar-producto" placeholder="Buscar por código, nombre o categoría">
+                    <button type="button" class="boton-editar" id="btn-restaurar">Restaurar lista original</button>
+                </div>
+
+                <p>Total: <strong id="total-productos">0</strong> productos</p>
+
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-productos"></tbody>
+                </table>
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- productos.js primero: desde ahí sale el arreglo base de productos -->
+    <script src="../js/productos.js"></script>
+    <script src="../js/admin-productos.js"></script>
+
+</body>
+
+</html>

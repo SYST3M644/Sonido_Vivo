@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Sonido Vivo</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/formularios.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav-principal">
+            <a href="../index.html">🏠 Inicio</a>
+            <a href="../index.html#catalogo">🎸 Productos</a>
+            <a href="nosotros.html">ℹ️ Nosotros</a>
+            <a href="contacto.html" class="activo">📞 Contacto</a>
+            <a href="cuenta.html">👤 Cuenta</a>
+            <a href="carrito.html">🛒 Carrito (<span id="cart-count">0</span>)</a>
+        </nav>
+    </header>
+
+    <main class="pagina-formulario">
+
+        <h1>Contacto</h1>
+        <p>Escríbenos si tienes dudas de un instrumento, del despacho o de una compra.
+            Te respondemos al correo que dejes aquí.</p>
+
+        <section class="tarjeta-panel">
+            <h2>Formulario de contacto</h2>
+
+            <!-- novalidate: apagamos la validación del navegador para que
+                 los mensajes los controle nuestro JavaScript. -->
+            <form id="form-contacto" novalidate>
+
+                <label for="nombre">
+                    Nombre completo
+                    <span class="contador" id="contador-nombre">0 / 100</span>
+                </label>
+                <input type="text" id="nombre" name="nombre" maxlength="100" autocomplete="name"
+                    placeholder="Ej: Nicolás Rojas">
+                <span class="mensaje-error" id="error-nombre"></span>
+
+                <label for="correo">
+                    Correo
+                    <span class="contador" id="contador-correo">0 / 100</span>
+                </label>
+                <input type="email" id="correo" name="correo" maxlength="100" autocomplete="email"
+                    list="dominios-correo" placeholder="tunombre@duoc.cl">
+                <datalist id="dominios-correo">
+                    <option value="@duoc.cl"></option>
+                    <option value="@profesor.duoc.cl"></option>
+                    <option value="@gmail.com"></option>
+                </datalist>
+                <span class="mensaje-ayuda">Solo aceptamos correos @duoc.cl, @profesor.duoc.cl y @gmail.com</span>
+                <span class="mensaje-error" id="error-correo"></span>
+
+                <label for="comentario">
+                    Comentario
+                    <span class="contador" id="contador-comentario">0 / 500</span>
+                </label>
+                <textarea id="comentario" name="comentario" maxlength="500"
+                    placeholder="Cuéntanos en qué te podemos ayudar"></textarea>
+                <span class="mensaje-error" id="error-comentario"></span>
+
+                <div class="fila-botones">
+                    <button type="submit" class="boton-principal">Enviar mensaje</button>
+                    <button type="button" class="boton-secundario" id="btn-limpiar">Limpiar formulario</button>
+                </div>
+
+            </form>
+
+            <!-- Aquí el JS muestra el mensaje de éxito o el resumen de errores -->
+            <div id="aviso-formulario"></div>
+
+        </section>
+
+        <section class="tarjeta-panel datos-tienda">
+            <h2>Otros canales</h2>
+
+            <article>
+                <h3>Tienda</h3>
+                <p>Av. Providencia 1234, Santiago</p>
+                <p>Lunes a viernes de 10:00 a 19:00 · Sábado de 11:00 a 15:00</p>
+            </article>
+
+            <article>
+                <h3>Teléfono y correo</h3>
+                <p>+56 2 2345 6789</p>
+                <p>contacto@sonidovivo.cl</p>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Tienda de Sonido. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- productos.js primero: desde ahí usamos actualizarContadorCarrito() -->
+    <script src="../js/productos.js"></script>
+    <script src="../js/contacto.js"></script>
+
+</body>
+
+</html>
